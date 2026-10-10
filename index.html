@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"><meta name="theme-color" content="#0f2422"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>OFFROAD 4×4 v0.4 — 4 уровня</title>
+<title>OFFROAD 4×4 v0.5 — 10 уровней</title>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#557f95;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;touch-action:none;user-select:none}canvas{width:100%;height:100%;display:block}#shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,24,23,.63),transparent 31%,transparent 65%,rgba(0,0,0,.24));pointer-events:none}#hud{position:absolute;top:max(12px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));text-shadow:0 2px 5px #102020;pointer-events:none}#brand{font-size:clamp(14px,2vw,19px);font-weight:900;letter-spacing:.12em;color:#ffe2a3}#speed{font-size:clamp(30px,4.3vw,50px);font-weight:900;line-height:1.16;margin:4px 0 2px}#speed small{font-weight:500;font-size:.38em;opacity:.8}#surface{font-size:clamp(11px,1.6vw,16px);font-weight:650}#mission{font-size:clamp(12px,1.65vw,17px);color:#ffd57e;font-weight:800;margin-top:8px}#topbuttons{position:absolute;right:max(14px,env(safe-area-inset-right));top:max(13px,env(safe-area-inset-top));display:flex;gap:9px}.btn{background:rgba(12,36,34,.79);border:1px solid rgba(235,244,236,.42);color:white;border-radius:16px;font-weight:900;font-size:clamp(14px,2vw,19px);text-shadow:0 1px 3px #0007;box-shadow:inset 0 1px 0 #fff2,0 7px 17px #0003;touch-action:none;cursor:pointer}.btn.down,.btn:active{background:rgba(228,156,54,.90);transform:scale(.98);border-color:#ffe2a1}#topbuttons .btn{height:47px;padding:0 16px;font-size:14px}#controls{position:absolute;inset:auto 0 max(24px,env(safe-area-inset-bottom)) 0;display:flex;justify-content:space-between;align-items:end;padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left));gap:10px;pointer-events:none}#controls>div{pointer-events:auto;display:flex;gap:11px;align-items:end}#steering .btn{width:clamp(72px,11vw,130px);height:clamp(75px,14vh,121px);font-size:33px}#pedals .btn{width:clamp(84px,12vw,156px);height:clamp(72px,12vh,110px)}#pedals #gas{height:clamp(103px,18vh,148px);background:rgba(144,98,30,.86)}#pedals #gas.down{background:#e5a446}#pedals #hand{height:clamp(62px,10vh,88px);font-size:clamp(12px,1.3vw,15px);padding:0 8px}#tip{position:absolute;top:32%;left:16px;font-size:13px;color:#f7eedb;text-shadow:0 2px 6px black;pointer-events:none}#notify{position:absolute;left:50%;top:26%;transform:translateX(-50%);padding:13px 23px;background:#102622db;border:1px solid #f7e0a688;border-radius:15px;font-weight:850;font-size:20px;display:none;text-align:center}#bad{position:absolute;inset:0;background:#172422;color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#557f95;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;touch-action:auto;user-select:none}canvas{width:100%;height:100%;display:block;touch-action:none}#shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,24,23,.63),transparent 31%,transparent 65%,rgba(0,0,0,.24));pointer-events:none}#hud{position:absolute;top:max(12px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));text-shadow:0 2px 5px #102020;pointer-events:none}#brand{font-size:clamp(14px,2vw,19px);font-weight:900;letter-spacing:.12em;color:#ffe2a3}#speed{font-size:clamp(30px,4.3vw,50px);font-weight:900;line-height:1.16;margin:4px 0 2px}#speed small{font-weight:500;font-size:.38em;opacity:.8}#surface{font-size:clamp(11px,1.6vw,16px);font-weight:650}#mission{font-size:clamp(12px,1.65vw,17px);color:#ffd57e;font-weight:800;margin-top:8px}#topbuttons{position:absolute;right:max(14px,env(safe-area-inset-right));top:max(13px,env(safe-area-inset-top));display:flex;gap:9px}.btn{background:rgba(12,36,34,.79);border:1px solid rgba(235,244,236,.42);color:white;border-radius:16px;font-weight:900;font-size:clamp(14px,2vw,19px);text-shadow:0 1px 3px #0007;box-shadow:inset 0 1px 0 #fff2,0 7px 17px #0003;touch-action:none;cursor:pointer}.btn.down,.btn:active{background:rgba(228,156,54,.90);transform:scale(.98);border-color:#ffe2a1}#topbuttons .btn{height:47px;padding:0 16px;font-size:14px}#controls{position:absolute;inset:auto 0 max(24px,env(safe-area-inset-bottom)) 0;display:flex;justify-content:space-between;align-items:end;padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left));gap:10px;pointer-events:none}#controls>div{pointer-events:auto;display:flex;gap:11px;align-items:end}#steering .btn{width:clamp(72px,11vw,130px);height:clamp(75px,14vh,121px);font-size:33px}#pedals .btn{width:clamp(84px,12vw,156px);height:clamp(72px,12vh,110px)}#pedals #gas{height:clamp(103px,18vh,148px);background:rgba(144,98,30,.86)}#pedals #gas.down{background:#e5a446}#pedals #hand{height:clamp(62px,10vh,88px);font-size:clamp(12px,1.3vw,15px);padding:0 8px}#tip{position:absolute;top:32%;left:16px;font-size:13px;color:#f7eedb;text-shadow:0 2px 6px black;pointer-events:none}#notify{position:absolute;left:50%;top:26%;transform:translateX(-50%);padding:13px 23px;background:#102622db;border:1px solid #f7e0a688;border-radius:15px;font-weight:850;font-size:20px;display:none;text-align:center}#bad{position:absolute;inset:0;background:#172422;color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
 @media (orientation:portrait){#tip::after{content:' · Поверни телефон горизонтально';color:#ffdc94}#controls{gap:4px;align-items:flex-end}#controls>div{gap:5px}#steering .btn{width:16vw;height:80px;font-size:23px}#pedals .btn{width:18vw;height:75px;font-size:12px}#pedals #gas{height:98px}#pedals #hand{width:16vw;font-size:10px;height:60px}#tip{top:25%;right:12px}}
 #techbuttons{position:absolute;right:max(14px,env(safe-area-inset-right));top:max(72px,calc(env(safe-area-inset-top) + 59px));display:flex;gap:7px}#techbuttons .btn{height:43px;padding:0 12px;font-size:clamp(11px,1.5vw,15px)}#techbuttons .btn.active{background:#755119;border-color:#f7ca7d}#driveMode{font-size:clamp(11px,1.4vw,14px);font-weight:800;letter-spacing:.02em;color:#d5f1d6;margin-top:4px;max-width:75vw}#techbuttons #winch.active{background:#876020}#techbuttons #awd.active{background:#215e42}#techbuttons #low.active{background:#755119}@media(max-width:690px){#techbuttons{top:max(67px,calc(env(safe-area-inset-top) + 54px))}#techbuttons .btn{padding:0 8px;font-size:11px;height:37px}#hud{max-width:67vw}#mission{max-width:72vw;font-size:11px}#driveMode{max-width:67vw;font-size:10px}#tip{font-size:10px}}
 #conditionPanel{margin-top:10px;width:clamp(205px,27vw,305px);background:rgba(8,28,27,.75);border:1px solid #d0dab855;border-radius:12px;padding:9px 11px;box-shadow:0 9px 22px #0003;font-size:12px;line-height:1.4}#conditionPanel .stat{display:flex;justify-content:space-between;font-weight:800;letter-spacing:.04em;margin-bottom:3px}#conditionPanel .track{height:7px;background:#121c1e;border-radius:6px;overflow:hidden;margin-bottom:6px}#conditionPanel .fill{display:block;height:100%;width:100%;background:#7bd59a;border-radius:6px;transition:width .18s,background .2s}#tempLine{font-size:12px;font-weight:800;color:#dbeae0}#conditionNote{font-size:11px;color:#ffe09c;margin-top:3px;max-width:100%;overflow-wrap:anywhere}#techbuttons #repair{background:#2b513f;border-color:#d2e9b17a}#techbuttons #repair.active{background:#367847}#alert{position:absolute;top:34%;left:50%;transform:translateX(-50%);background:rgba(28,37,27,.9);color:#ffe8b4;padding:9px 16px;border:1px solid #f2d092;border-radius:10px;text-align:center;font-weight:900;font-size:clamp(12px,1.7vw,17px);max-width:75vw;display:none;pointer-events:none;z-index:2}@media(max-width:690px){#conditionPanel{width:clamp(160px,34vw,220px);padding:6px 8px;font-size:10px;margin-top:6px}#conditionPanel .track{height:5px;margin-bottom:3px}#conditionPanel .stat,#tempLine,#conditionNote{font-size:9px}#techbuttons{gap:4px}#techbuttons #repair{padding:0 7px}#brand{font-size:12px}#speed{font-size:25px}#mission{margin-top:3px}#tip{display:none}}@media (max-height:450px){#conditionPanel{padding:5px 7px;margin-top:4px}#conditionNote{font-size:9px}}
@@ -15,8 +15,11 @@
  border-radius:18px;font:600 15px system-ui,sans-serif;color:#fff}
 #bootIndicator small{display:block;margin-top:7px;font-size:12px;opacity:.85;line-height:1.4}
 #topbuttons #levelsBtn{background:rgba(57,83,43,.92);border-color:#d8bf7f}
-#levelMenu{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(7,24,21,.97),rgba(17,37,36,.96));color:#f6f6ed;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:max(14px,env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
+#levelMenu{touch-action:pan-y;overscroll-behavior:contain;position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(7,24,21,.97),rgba(17,37,36,.96));color:#f6f6ed;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:max(14px,env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
 #levelMenu.hidden{display:none}
+#levelCards:focus-within{outline:none}
+#terrainAdvice{margin-top:5px;font-size:clamp(10px,1.35vw,12px);font-weight:750;color:#ffd69b;max-width:35vw}
+@media(max-height:450px){#terrainAdvice{max-width:33vw;font-size:10px}}
 #bad{z-index:20}
 .levelContent{width:min(820px,100%);margin:auto;text-align:center}
 .levelEyebrow{font-size:11px;letter-spacing:.22em;color:#eac681;font-weight:900}
@@ -30,7 +33,7 @@
 @media(max-width:640px){#levelMenu{padding:10px}#levelCards{gap:6px}.levelCard{padding:8px 10px;min-height:92px;gap:3px;border-radius:10px}#levelSubtitle{margin-bottom:7px}#levelTitle{font-size:22px}#levelFooter{margin-top:7px}#continueButton{padding:9px 12px;font-size:12px}}
 @media(max-width:680px) and (orientation:portrait){#levelCards{grid-template-columns:1fr}.levelCard{min-height:78px}}
 </style></head><body><canvas id="game"></canvas><div id="bootIndicator">Загрузка 3D-игры…<small>Если это сообщение не исчезает, открой игру в Safari по HTTPS-ссылке, а не во встроенном просмотрщике HTML.</small></div><div id="shade"></div>
-<div id="hud"><div id="brand">OFFROAD 4×4 <span style="font-weight:500">/ ЛЕСНАЯ ДОРОГА · v0.4</span></div><div id="speed"><span id="number">0</span> <small>КМ/Ч</small></div><div id="surface">ПОКРЫТИЕ: ГРУНТ</div><div id="mission">ФИНИШ ЧЕРЕЗ 217 М</div><div id="driveMode">4×4 · LOW: ВЫКЛ · ЛЕБЁДКА: ГОТОВА</div>
+<div id="hud"><div id="brand">OFFROAD 4×4 <span style="font-weight:500">/ ЛЕСНАЯ ДОРОГА · v0.5</span></div><div id="speed"><span id="number">0</span> <small>КМ/Ч</small></div><div id="surface">ПОКРЫТИЕ: ГРУНТ</div><div id="mission">ФИНИШ ЧЕРЕЗ 217 М</div><div id="driveMode">4×4 · LOW: ВЫКЛ · ЛЕБЁДКА: ГОТОВА</div><div id="terrainAdvice"></div>
 <div id="conditionPanel"><div class="stat"><span>КУЗОВ</span><span id="bodyPct">100%</span></div><div class="track"><span class="fill" id="bodyBar"></span></div><div class="stat"><span>ДВИГАТЕЛЬ</span><span id="enginePct">100%</span></div><div class="track"><span class="fill" id="engineBar"></span></div><div id="tempLine">🌡 ТЕМПЕРАТУРА: <span id="temp">73</span>°C · 🧰 <span id="kits">2</span></div><div id="conditionNote">Машина исправна · ремонт только стоя</div></div></div>
 <div id="topbuttons"><button class="btn" id="levelsBtn" title="Выбрать трассу">УРОВНИ</button><button class="btn" id="camera">КАМЕРА</button><button class="btn" id="reset" title="Поставить машину на дорогу">↺</button></div>
 <div id="techbuttons"><button class="btn active" id="awd" title="Полный/задний привод">4×4 ВКЛ</button><button class="btn" id="low" title="Пониженная передача">LOW ВЫКЛ</button><button class="btn" id="winch" title="Зацепить трос к ближайшему красному столбу">ЛЕБЁДКА</button><button class="btn" id="repair" title="Остановись: используй ремкомплект или заезжай на СТО">🧰 РЕМОНТ</button></div>
@@ -38,13 +41,13 @@
 <div id="controls"><div id="steering"><button class="btn" id="left">◀</button><button class="btn" id="right">▶</button></div><div id="pedals"><button class="btn" id="hand">РУЧНИК</button><button class="btn" id="brake">ТОРМОЗ<br>НАЗАД</button><button class="btn" id="gas">ГАЗ</button></div></div>
 <div id="levelMenu" role="dialog" aria-label="Выбор уровня">
 <div class="levelContent">
-  <div class="levelEyebrow">OFFROAD 4×4 · ВЕРСИЯ 0.4</div>
+  <div class="levelEyebrow">OFFROAD 4×4 · ВЕРСИЯ 0.5</div>
   <h1 id="levelTitle">ВЫБЕРИ МАРШРУТ</h1>
-  <p id="levelSubtitle">Проезжай уровни, открывай новые трассы и ремонтируй внедорожник.</p>
+  <p id="levelSubtitle">10 трасс: после первых 4 начинаются серьёзные испытания — глубокая грязь, броды, крутые подъёмы и узкие каменные коридоры. Прогресс сохраняется.</p>
   <div id="levelCards"></div>
-  <div id="levelFooter"><span id="levelProgress">ПРОГРЕСС: 0 / 4</span><button class="btn" id="continueButton">ПРОДОЛЖИТЬ ▶</button></div>
+  <div id="levelFooter"><span id="levelProgress">ПРОГРЕСС: 0 / 10</span><button class="btn" id="continueButton">ПРОДОЛЖИТЬ ▶</button></div>
 </div></div>
-<div id="notify"></div><div id="alert"></div><div id="bad"><strong>Не удалось запустить 3D</strong><p>Открой файл в Chrome или Samsung Internet с поддержкой WebGL.</p></div>
+<div id="notify"></div><div id="alert"></div><div id="bad"><strong>Не удалось запустить 3D</strong><p>Открой HTTPS-ссылку в Safari (iPhone) или Chrome с WebGL.</p></div>
 <script>
 window.addEventListener('error', function(ev){
   let overlay=document.getElementById('bootIndicator');
@@ -74,14 +77,28 @@ const LEVELS=[
  {name:'Лесная дорога',tag:'Обучение',desc:'Мягкий грунт, редкие лужи и два камня.',startZ:11,finishZ:-124,rough:.72,rut:1,curve:1,grass:[.20,.32,.17],road:[.39,.28,.17],mudZones:[[-23,-46],[-90,-113]],rocks:[[-64,2.2],[-99,-2.0]],trees:235,hill:0},
  {name:'Разбитый просёлок',tag:'Средняя сложность',desc:'Глубокие колеи, камни и сильные ухабы.',startZ:16,finishZ:-165,rough:1.1,rut:2.1,curve:1.35,grass:[.23,.29,.14],road:[.44,.28,.15],mudZones:[[-25,-52],[-75,-105],[-139,-161]],rocks:[[-48,2.1],[-79,-2.0],[-120,2.0],[-143,-2.2]],trees:190,hill:.5},
  {name:'Болотная тропа',tag:'Тяжёлая грязь',desc:'Длинные топкие участки — пригодятся LOW и лебёдка.',startZ:20,finishZ:-203,rough:.8,rut:2.8,curve:1.48,grass:[.16,.26,.16],road:[.29,.25,.15],mudZones:[[0,-44],[-61,-112],[-132,-194]],rocks:[[-118,2.1],[-181,-2.3]],trees:130,hill:0},
- {name:'Каменный перевал',tag:'Экстрим',desc:'Крутые подъёмы, много валунов и сложный финиш.',startZ:24,finishZ:-220,rough:1.5,rut:1.3,curve:1.65,grass:[.27,.31,.24],road:[.44,.40,.31],mudZones:[[-53,-73],[-143,-161]],rocks:[[-22,2.1],[-54,-2.2],[-83,2.2],[-116,-1.9],[-152,2.1],[-180,-2.2],[-204,2.1]],trees:105,hill:2.1}
+ {name:'Каменный перевал',tag:'Экстрим',desc:'Крутые подъёмы, много валунов и сложный финиш.',startZ:24,finishZ:-220,rough:1.5,rut:1.3,curve:1.65,grass:[.27,.31,.24],road:[.44,.40,.31],mudZones:[[-53,-73],[-143,-161]],rocks:[[-22,2.1],[-54,-2.2],[-83,2.2],[-116,-1.9],[-152,2.1],[-180,-2.2],[-204,2.1]],trees:105,hill:2.1},
+ {name:'Тёмный ельник',tag:'Мастер',desc:'Тесный лес, густая грязь и цепь валунов · 263 м.',startZ:20,finishZ:-243,rough:1.55,rut:2.55,curve:1.93,grass:[.10,.21,.14],road:[.30,.25,.17],mudZones:[[2,-34],[-58,-103],[-127,-164],[-192,-229]],rocks:[[-33,1.65],[-48,-1.7],[-72,2.0],[-97,-1.7],[-118,1.7],[-145,-1.8],[-171,2.0],[-205,-1.75],[-225,1.8]],trees:265,hill:1.3,traction:.78,shoulder:5.1,repairKits:2},
+ {name:'Песчаный карьер',tag:'Профи',desc:'Глубокий песок, крутые склоны и камни · 286 м.',startZ:21,finishZ:-265,rough:1.62,rut:1.6,curve:1.65,grass:[.29,.29,.19],road:[.56,.47,.29],mudZones:[[-42,-58],[-168,-184]],sandZones:[[14,-38],[-64,-141],[-193,-256]],rocks:[[-51,1.8],[-94,-2.0],[-112,1.8],[-151,-1.9],[-213,1.9],[-238,-1.8]],trees:64,hill:2.7,traction:.85,shoulder:5.0,repairKits:2},
+ {name:'Топкая низина',tag:'Эксперт',desc:'Сплошное болото, глубокие колеи, минимум сцепления · 310 м.',startZ:20,finishZ:-290,rough:1.03,rut:3.9,curve:1.75,grass:[.13,.23,.17],road:[.24,.23,.16],mudZones:[[14,-78],[-94,-165],[-183,-278]],rocks:[[-89,2.1],[-176,-1.9],[-231,1.7]],trees:122,hill:.4,traction:.64,shoulder:4.8,repairKits:1},
+ {name:'Горный серпантин',tag:'Легенда',desc:'Крутые повороты, каменные ворота и большой уклон · 335 м.',startZ:22,finishZ:-313,rough:2.12,rut:1.4,curve:2.6,grass:[.29,.28,.25],road:[.48,.40,.35],mudZones:[[-104,-128],[-242,-262]],rocks:[[-21,1.55],[-43,-1.55],[-65,1.45],[-85,-1.45],[-113,1.5],[-136,-1.5],[-159,1.55],[-187,-1.55],[-213,1.5],[-235,-1.55],[-267,1.45],[-290,-1.5]],trees:74,hill:3.8,traction:.92,shoulder:4.2,repairKits:1},
+ {name:'Затопленная просека',tag:'Выживание',desc:'Броды, размокшие берега и риск заглохнуть · 359 м.',startZ:24,finishZ:-335,rough:1.38,rut:3.05,curve:1.73,grass:[.13,.22,.19],road:[.29,.29,.21],mudZones:[[-13,-56],[-101,-151],[-200,-240],[-289,-322]],waterZones:[[-57,-90],[-159,-194],[-246,-279]],rocks:[[-34,1.95],[-115,-1.8],[-155,1.95],[-213,-1.8],[-263,1.8],[-311,-1.8]],trees:165,hill:.35,traction:.74,shoulder:4.9,repairKits:1},
+ {name:'Хребет испытаний',tag:'ФИНАЛ · ЭКСТРИМ',desc:'377 метров: грязь, песок, вода, валуны и отвесные склоны.',startZ:22,finishZ:-355,rough:2.20,rut:3.45,curve:2.38,grass:[.19,.21,.17],road:[.42,.32,.20],mudZones:[[-19,-58],[-113,-163],[-233,-264],[-307,-346]],sandZones:[[-67,-108],[-170,-206]],waterZones:[[-213,-230],[-271,-294]],rocks:[[-26,1.5],[-47,-1.5],[-78,1.55],[-98,-1.5],[-126,1.55],[-148,-1.5],[-176,1.55],[-199,-1.5],[-223,1.5],[-255,-1.55],[-275,1.55],[-298,-1.55],[-321,1.5],[-341,-1.5]],trees:92,hill:3.1,traction:.61,shoulder:4.3,repairKits:1}
 ];
 let levelIndex=0,level=LEVELS[0],unlocked=1,completedLevels=new Set(),menuOpen=true,selectedLevel=0;
 try{unlocked=Math.max(1,Math.min(LEVELS.length,Number(localStorage.getItem('offroadUnlocked')||1)||1));let saved=JSON.parse(localStorage.getItem('offroadCompleted')||'[]');completedLevels=new Set(saved.filter(i=>Number.isInteger(i)&&i>=0&&i<LEVELS.length));}catch(e){}
 function saveProgress(){try{localStorage.setItem('offroadUnlocked',String(unlocked));localStorage.setItem('offroadCompleted',JSON.stringify([...completedLevels]));}catch(e){}}
 function path(z){return level.curve*(3.2*Math.sin(z*.033+levelIndex*.35)+.9*Math.sin(z*.091+levelIndex*.29));}
 function ht(x,z){let d=Math.abs(x-path(z)),rough=level.rough*(.6*Math.sin(x*.087+Math.sin(z*.045))+.35*Math.cos(z*.065-x*.1)),soft=1-smooth(3.8,6.4,d),road=.15*Math.sin(z*.27)+.13*Math.sin(z*.53+x*.3),rut=-.24*level.rut*Math.exp(-Math.pow((d-.88)/.32,2)),crown=.11*Math.exp(-Math.pow(d/.6,2)),bank=.26*smooth(3.7,7,d),slope=level.hill*(.49*Math.sin(z*.026)+.24*Math.cos(z*.075));return(rough+bank)*(1-soft)+(road*level.rough+rut+crown)*soft+slope;}
-function mud(x,z){return Math.abs(x-path(z))<4.25&&level.mudZones.some(([hi,lo])=>z<hi&&z>lo);}
+function inZones(z,zones){return !!zones&&zones.some(([hi,lo])=>z<hi&&z>lo);}
+function groundType(x,z){
+  if(Math.abs(x-path(z))>4.25)return 'grass';
+  if(inZones(z,level.waterZones))return 'water';
+  if(inZones(z,level.sandZones))return 'sand';
+  if(inZones(z,level.mudZones))return 'mud';
+  return 'road';
+}
+function mud(x,z){let type=groundType(x,z);return type==='mud'||type==='water';}
 let anchors=[],crashRocks=[],servicePoint={x:0,z:-90};
 function seedrand(seed){return()=>((seed=Math.imul(seed,1664525)+1013904223|0)>>>0)/4294967296;}
 class Builder{constructor(){this.data=[]}tri(a,b,c,col,n){if(!n)n=norm(cross(sub(b,a),sub(c,a)));for(let p of [a,b,c])this.data.push(p[0],p[1],p[2],col[0],col[1],col[2],...n);}quad(a,b,c,d,col){this.tri(a,b,c,col);this.tri(a,c,d,col);}box(x,y,z,sx,sy,sz,col){let x0=x-sx/2,x1=x+sx/2,y0=y-sy/2,y1=y+sy/2,z0=z-sz/2,z1=z+sz/2;this.quad([x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1],col);this.quad([x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0],col);this.quad([x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],col);this.quad([x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0],col);this.quad([x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0],col);this.quad([x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],col);}cone(x,y,z,r,h,col,sides=7){for(let i=0;i<sides;i++){let a=i*Math.PI*2/sides,b=(i+1)*Math.PI*2/sides;this.tri([x+Math.sin(a)*r,y,z+Math.cos(a)*r],[x+Math.sin(b)*r,y,z+Math.cos(b)*r],[x,y+h,z],col)}}disk(x,y,z,r,col){let s=14;for(let i=0;i<s;i++){let a=i*Math.PI*2/s,b=(i+1)*Math.PI*2/s;this.tri([x,y,z],[x+Math.sin(b)*r,y,z+Math.cos(b)*r],[x+Math.sin(a)*r,y,z+Math.cos(a)*r],col,[0,1,0]);}}wheel(x,y,z,r,col){let n=12,t=.18;for(let i=0;i<n;i++){let a=i*Math.PI*2/n,b=(i+1)*Math.PI*2/n,p=[y+Math.cos(a)*r,z+Math.sin(a)*r],q=[y+Math.cos(b)*r,z+Math.sin(b)*r];this.quad([x-t,p[0],p[1]],[x+t,p[0],p[1]],[x+t,q[0],q[1]],[x-t,q[0],q[1]],col);}this.diskSide(x-t,y,z,r*.58,[.3,.34,.35]);this.diskSide(x+t,y,z,r*.58,[.38,.4,.4]);}diskSide(x,y,z,r,col){let n=12;for(let i=0;i<n;i++){let a=i*Math.PI*2/n,b=(i+1)*Math.PI*2/n;this.tri([x,y,z],[x,y+Math.cos(a)*r,z+Math.sin(a)*r],[x,y+Math.cos(b)*r,z+Math.sin(b)*r],col,[1,0,0]);}}build(){let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(this.data),gl.STATIC_DRAW);let o={buffer:b,count:this.data.length/9};this.data=[];return o;}}
@@ -91,16 +108,20 @@ function rebuildWorld(){
  if(ground)gl.deleteBuffer(ground.buffer);if(objects)gl.deleteBuffer(objects.buffer);
  land=new Builder();scenery=new Builder();
  let rng=seedrand(424242+levelIndex*1337);
- const dx=92/76,dz=263/190;
- for(let i=0;i<190;i++){let z0=-231+i*dz,z1=z0+dz;for(let j=0;j<76;j++){let x0=-46+j*dx,x1=x0+dx;
- function c(x,z){let d=Math.abs(x-path(z)),t=1-smooth(3.6,5.2,d),k=.025*Math.sin(x*1.57+z*.31);let q=level.grass.map((u,i)=>u*(1-t)+level.road[i]*t+k);if(mud(x,z))q=q.map((u,i)=>u*.35+[.16,.135,.10][i]*.65);return q;}
+ const xMin=-46,xMax=46,zMin=level.finishZ-21,zMax=Math.max(32,level.startZ+16);
+ const dx=92/76,stepsZ=Math.ceil((zMax-zMin)/1.39),dz=(zMax-zMin)/stepsZ;
+ for(let i=0;i<stepsZ;i++){let z0=zMin+i*dz,z1=z0+dz;for(let j=0;j<76;j++){let x0=-46+j*dx,x1=x0+dx;
+ function c(x,z){let d=Math.abs(x-path(z)),t=1-smooth(3.6,5.2,d),k=.025*Math.sin(x*1.57+z*.31);let q=level.grass.map((u,i)=>u*(1-t)+level.road[i]*t+k);let type=groundType(x,z);if(type==='mud')q=q.map((u,i)=>u*.35+[.16,.135,.10][i]*.65);
+ if(type==='sand')q=q.map((u,i)=>u*.28+[.67,.53,.31][i]*.72);
+ if(type==='water')q=q.map((u,i)=>u*.16+[.10,.31,.38][i]*.84);
+ return q;}
  function patch(a,b,c3){let q=[(a[0]+b[0]+c3[0])/3,(a[1]+b[1]+c3[1])/3,(a[2]+b[2]+c3[2])/3];let n=norm(cross(sub(b,a),sub(c3,a)));land.tri(a,b,c3,c(q[0],q[2]),n);}
  let a=[x0,ht(x0,z0),z0],b=[x0,ht(x0,z1),z1],c1=[x1,ht(x1,z0),z0],d=[x1,ht(x1,z1),z1];patch(a,b,c1);patch(c1,b,d);
  }}
- for(let i=0;i<level.trees;i++){let x=-45+rng()*90,z=-226+rng()*254,delta=Math.abs(x-path(z));if(delta<6.4)continue;let h=3.4+rng()*4.3,p=ht(x,z),light=rng()>.4;scenery.box(x,p+h*.23,z,.31,h*.46,.31,[.29,.22,.16]);for(let j=0;j<3;j++){let y=p+h*(.31+j*.20),r=h*.23*(1-j*.16);scenery.cone(x,y,z,r,h*.37,light?[.115,.28+j*.011,.18]:[.105,.23+j*.01,.15],7);}}
- for(let i=0;i<48;i++){let x=-45+rng()*90,z=-226+rng()*253;if(Math.abs(x-path(z))<5.3)continue;let r=.25+rng()*.95,y=ht(x,z)+r*.2;scenery.box(x,y,z,r*2,r*.55,r*1.5,[.35,.39,.36]);}
- for(let i=0;i<16;i++){let z=11-i*14;for(let s of [-1,1]){let x=path(z)+s*4.1;scenery.box(x,ht(x,z)+.6,z,.17,1.2,.17,[.93,.56,.20]);}}
- anchors=[level.startZ-8,-37,-83,-125,-168,-202].filter(z=>z>level.finishZ+8).map(z=>{let x=path(z)+6;return{x,y:ht(x,z)+1.18,z};});
+ for(let i=0;i<level.trees;i++){let x=-45+rng()*90,z=zMin+5+rng()*(zMax-zMin-10),delta=Math.abs(x-path(z));if(delta<6.4)continue;let h=3.4+rng()*4.3,p=ht(x,z),light=rng()>.4;scenery.box(x,p+h*.23,z,.31,h*.46,.31,[.29,.22,.16]);for(let j=0;j<3;j++){let y=p+h*(.31+j*.20),r=h*.23*(1-j*.16);scenery.cone(x,y,z,r,h*.37,light?[.115,.28+j*.011,.18]:[.105,.23+j*.01,.15],7);}}
+ for(let i=0;i<48;i++){let x=-45+rng()*90,z=zMin+5+rng()*(zMax-zMin-10);if(Math.abs(x-path(z))<5.3)continue;let r=.25+rng()*.95,y=ht(x,z)+r*.2;scenery.box(x,y,z,r*2,r*.55,r*1.5,[.35,.39,.36]);}
+ for(let i=0;i<Math.ceil((level.startZ-level.finishZ)/14);i++){let z=level.startZ-i*14;for(let s of [-1,1]){let x=path(z)+s*4.1;scenery.box(x,ht(x,z)+.6,z,.17,1.2,.17,[.93,.56,.20]);}}
+ anchors=[];for(let z=level.startZ-8;z>level.finishZ+8;z-=34){let x=path(z)+5.6;anchors.push({x,y:ht(x,z)+1.18,z});}
  for(let a of anchors){scenery.box(a.x,a.y,a.z,.35,2.36,.35,[.94,.24,.11]);scenery.box(a.x,a.y+1.22,a.z,.68,.18,.68,[.99,.84,.30]);}
  crashRocks=[];
  for(let [z,side] of level.rocks){let x=path(z)+side,y=ht(x,z)+.52;crashRocks.push({x,z,r:1.75});scenery.box(x,y,z,1.60,1.12,1.42,[.39,.43,.40]);scenery.box(x-.12,y+.50,z,.93,.27,1.01,[.47,.51,.48]);}
@@ -136,13 +157,14 @@ function reset(){winch.active=false;winch.anchor=null;winch.status='ГОТОВА
 function renderLevelCards(){
  const cards=btn('levelCards');cards.innerHTML='';
  LEVELS.forEach((lv,i)=>{
-  const locked=i>=unlocked,card=document.createElement('button');card.type='button';card.className='levelCard'+(i===selectedLevel?' selected':'');card.disabled=locked;
+  const locked=i>=unlocked,card=document.createElement('button');card.type='button';card.className='levelCard'+(i===selectedLevel?' selected':'');card.disabled=locked;if(i>=4)card.style.borderColor=locked?'#977b6488':'#ffa665aa';
   const label=locked?'🔒 ЗАКРЫТО':completedLevels.has(i)?'✓ ПРОЙДЕНО':i===levelIndex?'▶ ТЕКУЩИЙ':'● ДОСТУПЕН';
   card.innerHTML='<span class="levelNum">УРОВЕНЬ '+(i+1)+' · '+lv.tag+'</span><strong>'+lv.name+'</strong><span class="desc">'+lv.desc+'</span><span class="status">'+label+'</span>';
   card.addEventListener('click',()=>{selectedLevel=i;renderLevelCards();});cards.appendChild(card);
  });
  btn('levelProgress').textContent='ПРОЙДЕНО: '+completedLevels.size+' / '+LEVELS.length;
  btn('continueButton').textContent=selectedLevel===levelIndex&&!finished?'ПРОДОЛЖИТЬ ▶':'НАЧАТЬ УРОВЕНЬ ▶';
+ if(menuOpen)requestAnimationFrame(()=>{let card=cards.children[selectedLevel];if(card&&card.scrollIntoView)card.scrollIntoView({block:'nearest'});});
 }
 function showLevelMenu(title='ВЫБЕРИ МАРШРУТ'){
  menuOpen=true;Object.keys(keys).forEach(k=>keys[k]=false);btn('levelTitle').textContent=title;
@@ -153,10 +175,10 @@ function startLevel(n){
  if(n<0||n>=unlocked)return;
  levelIndex=n;level=LEVELS[n];rebuildWorld();
  car.x=path(level.startZ);car.z=level.startZ;car.y=ht(car.x,car.z)+.47;car.speed=0;car.yaw=Math.PI;car.roll=0;car.pitch=0;
- bodyHealth=100;engineHealth=100;engineTemp=73;repairKits=2;impactCooldown=0;alertSeconds=0;
+ bodyHealth=100;engineHealth=100;engineTemp=73;repairKits=level.repairKits??2;impactCooldown=0;alertSeconds=0;
  awd=true;lowGear=false;finished=false;shownMsg=false;winch={active:false,anchor:null,status:'ГОТОВА'};
  btn('notify').style.display='none';btn('alert').style.display='none';
- btn('brand').querySelector('span').textContent='/ '+level.name.toUpperCase()+' · v0.4';
+ btn('brand').querySelector('span').textContent='/ '+level.name.toUpperCase()+' · v0.5';
  btn('mission').textContent='ФИНИШ ЧЕРЕЗ '+Math.ceil(level.startZ-level.finishZ)+' М';
  cameraxy=[car.x,car.y+5,car.z+9];refreshTech();refreshCondition();closeLevelMenu();
 }
@@ -183,20 +205,27 @@ function update(dt){
  dt=Math.min(dt,.045);
  impactCooldown=Math.max(0,impactCooldown-dt);alertSeconds=Math.max(0,alertSeconds-dt);
  if(alertSeconds<=0)btn('alert').style.display='none';
- const isMud=mud(car.x,car.z),steer=(keys.left?1:0)-(keys.right?1:0);
- const traction=isMud?(awd?(levelIndex===2?.36:.45):.24):(awd?1:.85);
+ const terrain=groundType(car.x,car.z),isMud=terrain==='mud'||terrain==='water',isSand=terrain==='sand',isWater=terrain==='water';
+ const steer=(keys.left?1:0)-(keys.right?1:0);
+ const tractionBase=isMud?(awd?(levelIndex===2?.36:.45):.24):isSand?(awd?.54:.29):(awd?1:.85);
+ const traction=tractionBase*(level.traction||1);
  // Engine temperature and persistent wear accelerate in mud, especially without LOW.
- if(keys.gas&&engineHealth>0){let load=isMud?2.0:.8;if(lowGear&&isMud)load*=.6;if(isMud&&!awd)load*=1.42;engineTemp=Math.min(125,engineTemp+load*dt);let wear=.016+(isMud?.15:0);if(isMud&&lowGear)wear*=.62;engineHealth=Math.max(0,engineHealth-wear*dt);}
+ if(keys.gas&&engineHealth>0){let load=isWater?3.3:isMud?2.0:isSand?1.5:.8;
+ if(lowGear&&(isMud||isSand))load*=.66;if((isMud||isSand)&&!awd)load*=1.42;
+ engineTemp=Math.min(125,engineTemp+load*dt);
+ let wear=.016+(isWater?.34:isMud?.15:isSand?.12:0);
+ if((isMud||isSand)&&lowGear)wear*=.62;
+ engineHealth=Math.max(0,engineHealth-wear*dt);}
  else engineTemp=Math.max(70,engineTemp-1.8*dt);
  engineTemp=Math.max(70,engineTemp-Math.min(Math.abs(car.speed)*.035,.55)*dt);
  if(engineTemp>110)engineHealth=Math.max(0,engineHealth-(engineTemp-110)*.10*dt);
  let accel=0;
  if(keys.hand){car.speed*=Math.exp(-dt*3.5);}
  else if(keys.brake){accel=car.speed>1.1?-15:(lowGear?-9.5:-7.0);}
- else if(keys.gas){accel=isMud?(lowGear?(awd?8.5:3.5):(awd?3.6:1.7)):(lowGear?10.2:7.0);}
+ else if(keys.gas){accel=isMud?(lowGear?(awd?8.5:3.5):(awd?3.6:1.7)):isSand?(lowGear?(awd?7:3):(awd?3.2:1.45)):(lowGear?10.2:7.0);}
  if(!keys.gas&&!keys.brake)car.speed*=Math.exp(-dt*(isMud?1.30:.57));
  car.speed+=accel*powerFactor()*dt;
- const maxForward=(lowGear?(isMud?7.2:8.0):(isMud?(awd?11:6):19.2))*(levelIndex===3?.91:1);
+ const maxForward=(lowGear?(isWater?5.8:isMud?7.2:isSand?7.1:8.0):isWater?(awd?8:5):isMud?(awd?11:6):isSand?(awd?9.6:5.4):19.2)*(levelIndex===3?.91:1);
  car.speed=Math.max(lowGear?-4.0:-7,Math.min(maxForward,car.speed));
  if(keys.hand&&Math.abs(car.speed)<.15)car.speed=0;
  let steerpower=Math.min(1,Math.abs(car.speed)/3.5);
@@ -208,22 +237,27 @@ function update(dt){
 
  if(winch.active&&winch.anchor){let dx=winch.anchor.x-car.x,dz=winch.anchor.z-car.z,d=Math.hypot(dx,dz);if(d<=3.35){winch.active=false;winch.status='ДОТЯНУЛИСЬ';refreshTech();}else {let pull=Math.min(3.8*dt,Math.max(0,d-3.25));car.x+=(dx/d)*pull;car.z+=(dz/d)*pull;car.speed*=Math.exp(-dt*.42);winch.status='ТЯНЕТ: '+Math.round(d)+' М';}}
  let newY=ht(car.x,car.z)+.47;car.y+=(newY-car.y)*Math.min(1,dt*9);
- let off=Math.abs(car.x-path(car.z));if(off>43||car.z>32||car.z<-228){car.speed*=.95;car.x=Math.max(-43,Math.min(43,car.x));car.z=Math.max(-227,Math.min(30,car.z));}
+ let off=Math.abs(car.x-path(car.z));
+ if(level.shoulder&&off>level.shoulder){car.speed*=Math.exp(-dt*(off>8?2.1:1.0));
+   if(Math.abs(car.speed)>3.3){bodyHealth=Math.max(0,bodyHealth-.17*dt*(off>8?2:1));}}
+ if(off>43||car.z>level.startZ+22||car.z<level.finishZ-18){car.speed*=.95;car.x=Math.max(-43,Math.min(43,car.x));car.z=Math.max(level.finishZ-17,Math.min(level.startZ+21,car.z));}
  const right=[Math.cos(car.yaw),-Math.sin(car.yaw)],front=[Math.sin(car.yaw),Math.cos(car.yaw)];
  let hl=ht(car.x-right[0]*.9,car.z-right[1]*.9),hr=ht(car.x+right[0]*.9,car.z+right[1]*.9),hf=ht(car.x+front[0]*1.25,car.z+front[1]*1.25),hb=ht(car.x-front[0]*1.25,car.z-front[1]*1.25);
  car.roll+=(Math.atan2(hl-hr,1.8)-car.roll)*Math.min(1,dt*4.0);
  car.pitch+=(Math.atan2(hb-hf,2.5)-car.pitch)*Math.min(1,dt*3.4);
  btn('number').textContent=Math.round(Math.abs(car.speed)*3.6);
- btn('surface').textContent=isMud?'ПОКРЫТИЕ: ГЛУБОКАЯ ГРЯЗЬ':'ПОКРЫТИЕ: ГРУНТ / ТРАВА';btn('surface').style.color=isMud?'#ffb76f':'white';
+ const terrainNames={mud:'ГЛУБОКАЯ ГРЯЗЬ',water:'БРОД · ОСТОРОЖНО!',sand:'СЫПУЧИЙ ПЕСОК',grass:'ОБОЧИНА',road:'ГРУНТ'};
+ btn('surface').textContent='ПОКРЫТИЕ: '+terrainNames[terrain];btn('surface').style.color=terrain==='water'?'#89dff4':terrain==='mud'||terrain==='sand'?'#ffb76f':'white';
+ btn('terrainAdvice').textContent=isWater?'⚠ ВОДА ПЕРЕГРЕВАЕТ МОТОР — ВКЛЮЧИ LOW':terrain==='sand'?'ПЕСОК: ДЕРЖИ 4×4 И LOW':terrain==='mud'?'ГРЯЗЬ: ПОНИЖЕННАЯ И ЛЕБЁДКА':off>(level.shoulder||99)?'⚠ СЪЕХАЛ С ТРАССЫ — МАЛО СЦЕПЛЕНИЯ':'';
  btn('driveMode').textContent=(awd?'4×4':'4×2')+' · LOW: '+(lowGear?'ВКЛ':'ВЫКЛ')+' · ЛЕБЁДКА: '+winch.status;refreshCondition();
- btn('mission').textContent='УРОВЕНЬ '+(levelIndex+1)+'/4 · ДО ФИНИША '+Math.max(0,Math.ceil(car.z-level.finishZ))+' М';
+ btn('mission').textContent='УРОВЕНЬ '+(levelIndex+1)+'/'+LEVELS.length+' · ДО ФИНИША '+Math.max(0,Math.ceil(car.z-level.finishZ))+' М';
  if(car.z<=level.finishZ+5&&off<8)winLevel();
 }
 if(new URLSearchParams(location.search).has('test')){window.__offroadTest={
- state:()=>({x:car.x,z:car.z,speed:car.speed,bodyHealth,engineHealth,engineTemp,repairKits,nearService:nearService(),alert:conditionMessage,levelIndex,unlocked,completed:[...completedLevels],menuOpen,finishZ:level.finishZ,terrainName:level.name,mud:mud(car.x,car.z),rocks:crashRocks.length,anchors:anchors.length}),
+ state:()=>({x:car.x,z:car.z,speed:car.speed,bodyHealth,engineHealth,engineTemp,repairKits,nearService:nearService(),alert:conditionMessage,levelIndex,unlocked,completed:[...completedLevels],menuOpen,finishZ:level.finishZ,terrainName:level.name,mud:mud(car.x,car.z),rocks:crashRocks.length,anchors:anchors.length,terrain:groundType(car.x,car.z),shoulder:level.shoulder||null,repairLimit:level.repairKits??2}),
  setCar:(x,z,speed=0)=>{car.x=x;car.z=z;car.y=ht(x,z)+.47;car.speed=speed;},
  impact:(speed)=>{damageFromImpact(speed);refreshCondition();},repair:()=>repair(),
- setDamage:(b,e,temp=engineTemp,kits=repairKits)=>{bodyHealth=b;engineHealth=e;engineTemp=temp;repairKits=kits;refreshCondition()},levels:()=>LEVELS.map(l=>({name:l.name,startZ:l.startZ,finishZ:l.finishZ,mudZones:l.mudZones,rocks:l.rocks.length})),startLevel:(n)=>startLevel(n),finish:()=>{car.z=level.finishZ+4;car.x=path(car.z);winLevel()},showMenu:()=>showLevelMenu(),select:(n)=>{selectedLevel=n;renderLevelCards();},continue:()=>{if(selectedLevel===levelIndex&&!finished)closeLevelMenu();else startLevel(selectedLevel)}
+ setDamage:(b,e,temp=engineTemp,kits=repairKits)=>{bodyHealth=b;engineHealth=e;engineTemp=temp;repairKits=kits;refreshCondition()},levels:()=>LEVELS.map(l=>({name:l.name,startZ:l.startZ,finishZ:l.finishZ,mudZones:l.mudZones,sandZones:l.sandZones||[],waterZones:l.waterZones||[],rocks:l.rocks.length,repairKits:l.repairKits??2})),startLevel:(n)=>startLevel(n),finish:()=>{car.z=level.finishZ+4;car.x=path(car.z);winLevel()},showMenu:()=>showLevelMenu(),select:(n)=>{selectedLevel=n;renderLevelCards();},continue:()=>{if(selectedLevel===levelIndex&&!finished)closeLevelMenu();else startLevel(selectedLevel)}
  };}
 let cameraxy=[car.x,car.y+5,car.z+9];function render(t){let dt=last?(t-last)/1000:0;last=t;update(dt);let w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(window.devicePixelRatio||1,1.8),W=Math.min(2300,Math.round(w*dpr)),H=Math.min(1600,Math.round(h*dpr));if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;gl.viewport(0,0,W,H)}const f=farCamera?10.1:6.0,up=farCamera?4.3:2.6,desired=[car.x-Math.sin(car.yaw)*f,car.y+up,car.z-Math.cos(car.yaw)*f];let rate=Math.min(1,dt*5);for(let i=0;i<3;i++)cameraxy[i]+=(desired[i]-cameraxy[i])*rate;let hcam=ht(cameraxy[0],cameraxy[2]);cameraxy[1]=Math.max(cameraxy[1],hcam+1.7);gl.clearColor(.43,.62,.75,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);let pr=persp(Math.PI/3.25,W/H,.15,340),vw=look(cameraxy,[car.x,car.y+1.15,car.z]),pv=mult(pr,vw);gl.uniform3fv(uEye,new Float32Array(cameraxy));draw(ground,pv,id());draw(objects,pv,id());draw(vehicle,pv,model([car.x,car.y,car.z],car.yaw,car.roll,car.pitch));drawCable(pv);
   if(!window.__offroadFirstFrame){window.__offroadFirstFrame=true;document.getElementById('bootIndicator').style.display='none';}
