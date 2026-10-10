@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"><meta name="theme-color" content="#0f2422"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>OFFROAD 4×4 v0.3 — Урон и ремонт</title>
+<title>OFFROAD 4×4 v0.4 — 4 уровня</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#557f95;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;touch-action:none;user-select:none}canvas{width:100%;height:100%;display:block}#shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,24,23,.63),transparent 31%,transparent 65%,rgba(0,0,0,.24));pointer-events:none}#hud{position:absolute;top:max(12px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));text-shadow:0 2px 5px #102020;pointer-events:none}#brand{font-size:clamp(14px,2vw,19px);font-weight:900;letter-spacing:.12em;color:#ffe2a3}#speed{font-size:clamp(30px,4.3vw,50px);font-weight:900;line-height:1.16;margin:4px 0 2px}#speed small{font-weight:500;font-size:.38em;opacity:.8}#surface{font-size:clamp(11px,1.6vw,16px);font-weight:650}#mission{font-size:clamp(12px,1.65vw,17px);color:#ffd57e;font-weight:800;margin-top:8px}#topbuttons{position:absolute;right:max(14px,env(safe-area-inset-right));top:max(13px,env(safe-area-inset-top));display:flex;gap:9px}.btn{background:rgba(12,36,34,.79);border:1px solid rgba(235,244,236,.42);color:white;border-radius:16px;font-weight:900;font-size:clamp(14px,2vw,19px);text-shadow:0 1px 3px #0007;box-shadow:inset 0 1px 0 #fff2,0 7px 17px #0003;touch-action:none;cursor:pointer}.btn.down,.btn:active{background:rgba(228,156,54,.90);transform:scale(.98);border-color:#ffe2a1}#topbuttons .btn{height:47px;padding:0 16px;font-size:14px}#controls{position:absolute;inset:auto 0 max(24px,env(safe-area-inset-bottom)) 0;display:flex;justify-content:space-between;align-items:end;padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left));gap:10px;pointer-events:none}#controls>div{pointer-events:auto;display:flex;gap:11px;align-items:end}#steering .btn{width:clamp(72px,11vw,130px);height:clamp(75px,14vh,121px);font-size:33px}#pedals .btn{width:clamp(84px,12vw,156px);height:clamp(72px,12vh,110px)}#pedals #gas{height:clamp(103px,18vh,148px);background:rgba(144,98,30,.86)}#pedals #gas.down{background:#e5a446}#pedals #hand{height:clamp(62px,10vh,88px);font-size:clamp(12px,1.3vw,15px);padding:0 8px}#tip{position:absolute;top:32%;left:16px;font-size:13px;color:#f7eedb;text-shadow:0 2px 6px black;pointer-events:none}#notify{position:absolute;left:50%;top:26%;transform:translateX(-50%);padding:13px 23px;background:#102622db;border:1px solid #f7e0a688;border-radius:15px;font-weight:850;font-size:20px;display:none;text-align:center}#bad{position:absolute;inset:0;background:#172422;color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
 @media (orientation:portrait){#tip::after{content:' · Поверни телефон горизонтально';color:#ffdc94}#controls{gap:4px;align-items:flex-end}#controls>div{gap:5px}#steering .btn{width:16vw;height:80px;font-size:23px}#pedals .btn{width:18vw;height:75px;font-size:12px}#pedals #gas{height:98px}#pedals #hand{width:16vw;font-size:10px;height:60px}#tip{top:25%;right:12px}}
@@ -14,13 +14,36 @@
  background:rgba(9,30,32,.88);border:1px solid rgba(255,255,255,.35);
  border-radius:18px;font:600 15px system-ui,sans-serif;color:#fff}
 #bootIndicator small{display:block;margin-top:7px;font-size:12px;opacity:.85;line-height:1.4}
+#topbuttons #levelsBtn{background:rgba(57,83,43,.92);border-color:#d8bf7f}
+#levelMenu{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(7,24,21,.97),rgba(17,37,36,.96));color:#f6f6ed;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:max(14px,env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
+#levelMenu.hidden{display:none}
+#bad{z-index:20}
+.levelContent{width:min(820px,100%);margin:auto;text-align:center}
+.levelEyebrow{font-size:11px;letter-spacing:.22em;color:#eac681;font-weight:900}
+#levelTitle{font-size:clamp(23px,4vw,40px);line-height:1.08;margin:6px 0 7px}
+#levelSubtitle{font-size:clamp(11px,1.7vw,15px);color:#bad0c2;margin:0 auto 16px;max-width:590px}
+#levelCards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;text-align:left}
+.levelCard{background:linear-gradient(125deg,rgba(46,78,63,.96),rgba(27,47,45,.94));border:1px solid #98b7a777;border-radius:14px;min-height:106px;padding:13px 13px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px;color:white;text-align:left;cursor:pointer;box-shadow:0 6px 18px #0003}
+.levelCard .levelNum{font-size:11px;color:#ffd690;letter-spacing:.12em;font-weight:800}.levelCard strong{font-size:clamp(14px,2vw,21px)}.levelCard .desc{font-size:clamp(10px,1.4vw,13px);line-height:1.25;color:#d0e0d3}.levelCard .status{font-size:11px;font-weight:850;color:#a9e7b3}
+.levelCard:disabled{opacity:.53;cursor:not-allowed;filter:grayscale(.7)}.levelCard.selected{border:2px solid #ffdd87;background:linear-gradient(120deg,#37694b,#224538)}
+#levelFooter{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px;font-size:12px;font-weight:850;color:#ffe0a2}#continueButton{padding:12px 18px;background:#ad772f;color:white}
+@media(max-width:640px){#levelMenu{padding:10px}#levelCards{gap:6px}.levelCard{padding:8px 10px;min-height:92px;gap:3px;border-radius:10px}#levelSubtitle{margin-bottom:7px}#levelTitle{font-size:22px}#levelFooter{margin-top:7px}#continueButton{padding:9px 12px;font-size:12px}}
+@media(max-width:680px) and (orientation:portrait){#levelCards{grid-template-columns:1fr}.levelCard{min-height:78px}}
 </style></head><body><canvas id="game"></canvas><div id="bootIndicator">Загрузка 3D-игры…<small>Если это сообщение не исчезает, открой игру в Safari по HTTPS-ссылке, а не во встроенном просмотрщике HTML.</small></div><div id="shade"></div>
-<div id="hud"><div id="brand">OFFROAD 4×4 <span style="font-weight:500">/ ЛЕСНАЯ ДОРОГА · v0.3</span></div><div id="speed"><span id="number">0</span> <small>КМ/Ч</small></div><div id="surface">ПОКРЫТИЕ: ГРУНТ</div><div id="mission">ФИНИШ ЧЕРЕЗ 217 М</div><div id="driveMode">4×4 · LOW: ВЫКЛ · ЛЕБЁДКА: ГОТОВА</div>
+<div id="hud"><div id="brand">OFFROAD 4×4 <span style="font-weight:500">/ ЛЕСНАЯ ДОРОГА · v0.4</span></div><div id="speed"><span id="number">0</span> <small>КМ/Ч</small></div><div id="surface">ПОКРЫТИЕ: ГРУНТ</div><div id="mission">ФИНИШ ЧЕРЕЗ 217 М</div><div id="driveMode">4×4 · LOW: ВЫКЛ · ЛЕБЁДКА: ГОТОВА</div>
 <div id="conditionPanel"><div class="stat"><span>КУЗОВ</span><span id="bodyPct">100%</span></div><div class="track"><span class="fill" id="bodyBar"></span></div><div class="stat"><span>ДВИГАТЕЛЬ</span><span id="enginePct">100%</span></div><div class="track"><span class="fill" id="engineBar"></span></div><div id="tempLine">🌡 ТЕМПЕРАТУРА: <span id="temp">73</span>°C · 🧰 <span id="kits">2</span></div><div id="conditionNote">Машина исправна · ремонт только стоя</div></div></div>
-<div id="topbuttons"><button class="btn" id="camera">КАМЕРА</button><button class="btn" id="reset" title="Поставить машину на дорогу">↺</button></div>
+<div id="topbuttons"><button class="btn" id="levelsBtn" title="Выбрать трассу">УРОВНИ</button><button class="btn" id="camera">КАМЕРА</button><button class="btn" id="reset" title="Поставить машину на дорогу">↺</button></div>
 <div id="techbuttons"><button class="btn active" id="awd" title="Полный/задний привод">4×4 ВКЛ</button><button class="btn" id="low" title="Пониженная передача">LOW ВЫКЛ</button><button class="btn" id="winch" title="Зацепить трос к ближайшему красному столбу">ЛЕБЁДКА</button><button class="btn" id="repair" title="Остановись: используй ремкомплект или заезжай на СТО">🧰 РЕМОНТ</button></div>
 <div id="tip">WASD — ехать · F — 4×4 · Q — LOW · E — трос · T — ремонт</div>
 <div id="controls"><div id="steering"><button class="btn" id="left">◀</button><button class="btn" id="right">▶</button></div><div id="pedals"><button class="btn" id="hand">РУЧНИК</button><button class="btn" id="brake">ТОРМОЗ<br>НАЗАД</button><button class="btn" id="gas">ГАЗ</button></div></div>
+<div id="levelMenu" role="dialog" aria-label="Выбор уровня">
+<div class="levelContent">
+  <div class="levelEyebrow">OFFROAD 4×4 · ВЕРСИЯ 0.4</div>
+  <h1 id="levelTitle">ВЫБЕРИ МАРШРУТ</h1>
+  <p id="levelSubtitle">Проезжай уровни, открывай новые трассы и ремонтируй внедорожник.</p>
+  <div id="levelCards"></div>
+  <div id="levelFooter"><span id="levelProgress">ПРОГРЕСС: 0 / 4</span><button class="btn" id="continueButton">ПРОДОЛЖИТЬ ▶</button></div>
+</div></div>
 <div id="notify"></div><div id="alert"></div><div id="bad"><strong>Не удалось запустить 3D</strong><p>Открой файл в Chrome или Samsung Internet с поддержкой WebGL.</p></div>
 <script>
 window.addEventListener('error', function(ev){
@@ -47,33 +70,54 @@ function look(eye,at){let z=norm(sub(eye,at)),x=norm(cross([0,1,0],z)),y=cross(z
 function model(pos,yaw=0,roll=0,pitch=0){let c=Math.cos(yaw),s=Math.sin(yaw),r=Math.cos(roll),q=Math.sin(roll),p=Math.cos(pitch),t=Math.sin(pitch);let Y=new Float32Array([c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1]);let R=new Float32Array([r,q,0,0,-q,r,0,0,0,0,1,0,0,0,0,1]);let P=new Float32Array([1,0,0,0,0,p,t,0,0,-t,p,0,0,0,0,1]);let m=mult(Y,mult(R,P));m[12]=pos[0];m[13]=pos[1];m[14]=pos[2];return m;}
 function sub(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]];}function dot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];}function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}function norm(a){let m=Math.hypot(...a)||1;return a.map(x=>x/m)}
 function smooth(a,b,x){let t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)}
-function path(z){return 3.2*Math.sin(z*.033)+.9*Math.sin(z*.091)}
-function ht(x,z){let d=Math.abs(x-path(z)),rough=.6*Math.sin(x*.087+Math.sin(z*.045))+.35*Math.cos(z*.065-x*.1),soft=1-smooth(3.8,6.4,d),road=.15*Math.sin(z*.27)+.13*Math.sin(z*.53+x*.3),rut=-.24*Math.exp(-Math.pow((d-.88)/.32,2)),crown=.11*Math.exp(-Math.pow(d/.6,2)),bank=.26*smooth(3.7,7,d);return(rough+bank)*(1-soft)+(road+rut+crown)*soft;}
-function mud(x,z){return Math.abs(x-path(z))<4.2&&((z<-23&&z>-48)||(z<-91&&z>-114)||(z<-154&&z>-175));}
-const anchors=[5,-37,-103,-166,-195].map(z=>{let x=path(z)+6;return {x,y:ht(x,z)+1.18,z}});
-function seedrand(seed){return()=>((seed=Math.imul(seed,1664525)+1013904223|0)>>>0)/4294967296;}const rng=seedrand(424242);
+const LEVELS=[
+ {name:'Лесная дорога',tag:'Обучение',desc:'Мягкий грунт, редкие лужи и два камня.',startZ:11,finishZ:-124,rough:.72,rut:1,curve:1,grass:[.20,.32,.17],road:[.39,.28,.17],mudZones:[[-23,-46],[-90,-113]],rocks:[[-64,2.2],[-99,-2.0]],trees:235,hill:0},
+ {name:'Разбитый просёлок',tag:'Средняя сложность',desc:'Глубокие колеи, камни и сильные ухабы.',startZ:16,finishZ:-165,rough:1.1,rut:2.1,curve:1.35,grass:[.23,.29,.14],road:[.44,.28,.15],mudZones:[[-25,-52],[-75,-105],[-139,-161]],rocks:[[-48,2.1],[-79,-2.0],[-120,2.0],[-143,-2.2]],trees:190,hill:.5},
+ {name:'Болотная тропа',tag:'Тяжёлая грязь',desc:'Длинные топкие участки — пригодятся LOW и лебёдка.',startZ:20,finishZ:-203,rough:.8,rut:2.8,curve:1.48,grass:[.16,.26,.16],road:[.29,.25,.15],mudZones:[[0,-44],[-61,-112],[-132,-194]],rocks:[[-118,2.1],[-181,-2.3]],trees:130,hill:0},
+ {name:'Каменный перевал',tag:'Экстрим',desc:'Крутые подъёмы, много валунов и сложный финиш.',startZ:24,finishZ:-220,rough:1.5,rut:1.3,curve:1.65,grass:[.27,.31,.24],road:[.44,.40,.31],mudZones:[[-53,-73],[-143,-161]],rocks:[[-22,2.1],[-54,-2.2],[-83,2.2],[-116,-1.9],[-152,2.1],[-180,-2.2],[-204,2.1]],trees:105,hill:2.1}
+];
+let levelIndex=0,level=LEVELS[0],unlocked=1,completedLevels=new Set(),menuOpen=true,selectedLevel=0;
+try{unlocked=Math.max(1,Math.min(LEVELS.length,Number(localStorage.getItem('offroadUnlocked')||1)||1));let saved=JSON.parse(localStorage.getItem('offroadCompleted')||'[]');completedLevels=new Set(saved.filter(i=>Number.isInteger(i)&&i>=0&&i<LEVELS.length));}catch(e){}
+function saveProgress(){try{localStorage.setItem('offroadUnlocked',String(unlocked));localStorage.setItem('offroadCompleted',JSON.stringify([...completedLevels]));}catch(e){}}
+function path(z){return level.curve*(3.2*Math.sin(z*.033+levelIndex*.35)+.9*Math.sin(z*.091+levelIndex*.29));}
+function ht(x,z){let d=Math.abs(x-path(z)),rough=level.rough*(.6*Math.sin(x*.087+Math.sin(z*.045))+.35*Math.cos(z*.065-x*.1)),soft=1-smooth(3.8,6.4,d),road=.15*Math.sin(z*.27)+.13*Math.sin(z*.53+x*.3),rut=-.24*level.rut*Math.exp(-Math.pow((d-.88)/.32,2)),crown=.11*Math.exp(-Math.pow(d/.6,2)),bank=.26*smooth(3.7,7,d),slope=level.hill*(.49*Math.sin(z*.026)+.24*Math.cos(z*.075));return(rough+bank)*(1-soft)+(road*level.rough+rut+crown)*soft+slope;}
+function mud(x,z){return Math.abs(x-path(z))<4.25&&level.mudZones.some(([hi,lo])=>z<hi&&z>lo);}
+let anchors=[],crashRocks=[],servicePoint={x:0,z:-90};
+function seedrand(seed){return()=>((seed=Math.imul(seed,1664525)+1013904223|0)>>>0)/4294967296;}
 class Builder{constructor(){this.data=[]}tri(a,b,c,col,n){if(!n)n=norm(cross(sub(b,a),sub(c,a)));for(let p of [a,b,c])this.data.push(p[0],p[1],p[2],col[0],col[1],col[2],...n);}quad(a,b,c,d,col){this.tri(a,b,c,col);this.tri(a,c,d,col);}box(x,y,z,sx,sy,sz,col){let x0=x-sx/2,x1=x+sx/2,y0=y-sy/2,y1=y+sy/2,z0=z-sz/2,z1=z+sz/2;this.quad([x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1],col);this.quad([x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0],col);this.quad([x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],col);this.quad([x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0],col);this.quad([x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0],col);this.quad([x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],col);}cone(x,y,z,r,h,col,sides=7){for(let i=0;i<sides;i++){let a=i*Math.PI*2/sides,b=(i+1)*Math.PI*2/sides;this.tri([x+Math.sin(a)*r,y,z+Math.cos(a)*r],[x+Math.sin(b)*r,y,z+Math.cos(b)*r],[x,y+h,z],col)}}disk(x,y,z,r,col){let s=14;for(let i=0;i<s;i++){let a=i*Math.PI*2/s,b=(i+1)*Math.PI*2/s;this.tri([x,y,z],[x+Math.sin(b)*r,y,z+Math.cos(b)*r],[x+Math.sin(a)*r,y,z+Math.cos(a)*r],col,[0,1,0]);}}wheel(x,y,z,r,col){let n=12,t=.18;for(let i=0;i<n;i++){let a=i*Math.PI*2/n,b=(i+1)*Math.PI*2/n,p=[y+Math.cos(a)*r,z+Math.sin(a)*r],q=[y+Math.cos(b)*r,z+Math.sin(b)*r];this.quad([x-t,p[0],p[1]],[x+t,p[0],p[1]],[x+t,q[0],q[1]],[x-t,q[0],q[1]],col);}this.diskSide(x-t,y,z,r*.58,[.3,.34,.35]);this.diskSide(x+t,y,z,r*.58,[.38,.4,.4]);}diskSide(x,y,z,r,col){let n=12;for(let i=0;i<n;i++){let a=i*Math.PI*2/n,b=(i+1)*Math.PI*2/n;this.tri([x,y,z],[x,y+Math.cos(a)*r,z+Math.sin(a)*r],[x,y+Math.cos(b)*r,z+Math.sin(b)*r],col,[1,0,0]);}}build(){let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(this.data),gl.STATIC_DRAW);let o={buffer:b,count:this.data.length/9};this.data=[];return o;}}
 let land=new Builder(),scenery=new Builder(),truck=new Builder();
-const step=1.25,dx=92/76,dz=263/190;
-for(let i=0;i<190;i++){let z0=-231+i*dz,z1=z0+dz;for(let j=0;j<76;j++){let x0=-46+j*dx,x1=x0+dx;function c(x,z){let d=Math.abs(x-path(z)),t=1-smooth(3.6,5.2,d),k=.025*Math.sin(x*1.57+z*.31);let a=[.20,.32,.17],b=[.39,.28,.17],q=a.map((u,i)=>u*(1-t)+b[i]*t+k);if(mud(x,z))q=q.map((u,i)=>u*.35+[.16,.135,.10][i]*.65);return q}function patch(a,b,c3){let q=[(a[0]+b[0]+c3[0])/3,(a[1]+b[1]+c3[1])/3,(a[2]+b[2]+c3[2])/3];let n=norm(cross(sub(b,a),sub(c3,a)));land.tri(a,b,c3,c(q[0],q[2]),n)}let a=[x0,ht(x0,z0),z0],b=[x0,ht(x0,z1),z1],c1=[x1,ht(x1,z0),z0],d=[x1,ht(x1,z1),z1];patch(a,b,c1);patch(c1,b,d);}}
-for(let i=0;i<235;i++){let x=-45+rng()*90,z=-226+rng()*254,delta=Math.abs(x-path(z));if(delta<6.4)continue;let h=3.4+rng()*4.3,p=ht(x,z),light=rng()>.4;scenery.box(x,p+h*.23,z,.31,h*.46,.31,[.29,.22,.16]);for(let j=0;j<3;j++){let y=p+h*(.31+j*.20),r=h*.23*(1-j*.16);scenery.cone(x,y,z,r,h*.37,light?[.115,.28+j*.011,.18]:[.105,.23+j*.01,.15],7)}}
-for(let i=0;i<43;i++){let x=-45+rng()*90,z=-226+rng()*253;if(Math.abs(x-path(z))<5.3)continue;let r=.25+rng()*.95,y=ht(x,z)+r*.2;scenery.box(x,y,z,r*2,r*.55,r*1.5,[.35,.39,.36]);}
-for(let i=0;i<15;i++){let z=11-i*14;for(let s of [-1,1]){let x=path(z)+s*4.1;scenery.box(x,ht(x,z)+.6,z,.17,1.2,.17,[.93,.56,.20])}}
-for(let a of anchors){scenery.box(a.x,a.y,a.z,.35,2.36,.35,[.94,.24,.11]);scenery.box(a.x,a.y+1.22,a.z,.68,.18,.68,[.99,.84,.30]);}
-const crashRocks=[];
-for(const item of [{side:2.4,z:-59},{side:-2.25,z:-139},{side:2.45,z:-182}]){let x=path(item.z)+item.side,y=ht(x,item.z)+.52;crashRocks.push({x,z:item.z,r:1.75});scenery.box(x,y,item.z,1.60,1.12,1.42,[.39,.43,.40]);scenery.box(x-.12,y+.50,item.z,.93,.27,1.01,[.47,.51,.48]);}
-const servicePoint={x:path(-126)+6.4,z:-126};const serviceY=ht(servicePoint.x,servicePoint.z);
-scenery.box(servicePoint.x,serviceY+2.0,servicePoint.z,.35,4.0,.35,[.97,.48,.12]);
-scenery.box(servicePoint.x,serviceY+4.1,servicePoint.z,2.6,.95,.25,[.95,.94,.81]);
-scenery.box(servicePoint.x,serviceY+.07,servicePoint.z,4.2,.13,5.5,[.69,.47,.18]);
-for(let z of [-35,-102,-163]){for(let s of [-1,1]){let x=path(z)+s*.91,y=ht(x,z)+.065;scenery.box(x,y,z,1.7,.014,7.1,[.16,.28,.29]);}}
-for(let s of [-1,1]){let x=path(-203)+s*4.2;scenery.box(x,ht(x,-203)+2.5,-203,.38,5.0,.4,[.98,.62,.22])}scenery.box(path(-203),ht(path(-203),-203)+5.0,-203,8.9,.55,.5,[.98,.62,.22]);
+let ground=null,objects=null;
+function rebuildWorld(){
+ if(ground)gl.deleteBuffer(ground.buffer);if(objects)gl.deleteBuffer(objects.buffer);
+ land=new Builder();scenery=new Builder();
+ let rng=seedrand(424242+levelIndex*1337);
+ const dx=92/76,dz=263/190;
+ for(let i=0;i<190;i++){let z0=-231+i*dz,z1=z0+dz;for(let j=0;j<76;j++){let x0=-46+j*dx,x1=x0+dx;
+ function c(x,z){let d=Math.abs(x-path(z)),t=1-smooth(3.6,5.2,d),k=.025*Math.sin(x*1.57+z*.31);let q=level.grass.map((u,i)=>u*(1-t)+level.road[i]*t+k);if(mud(x,z))q=q.map((u,i)=>u*.35+[.16,.135,.10][i]*.65);return q;}
+ function patch(a,b,c3){let q=[(a[0]+b[0]+c3[0])/3,(a[1]+b[1]+c3[1])/3,(a[2]+b[2]+c3[2])/3];let n=norm(cross(sub(b,a),sub(c3,a)));land.tri(a,b,c3,c(q[0],q[2]),n);}
+ let a=[x0,ht(x0,z0),z0],b=[x0,ht(x0,z1),z1],c1=[x1,ht(x1,z0),z0],d=[x1,ht(x1,z1),z1];patch(a,b,c1);patch(c1,b,d);
+ }}
+ for(let i=0;i<level.trees;i++){let x=-45+rng()*90,z=-226+rng()*254,delta=Math.abs(x-path(z));if(delta<6.4)continue;let h=3.4+rng()*4.3,p=ht(x,z),light=rng()>.4;scenery.box(x,p+h*.23,z,.31,h*.46,.31,[.29,.22,.16]);for(let j=0;j<3;j++){let y=p+h*(.31+j*.20),r=h*.23*(1-j*.16);scenery.cone(x,y,z,r,h*.37,light?[.115,.28+j*.011,.18]:[.105,.23+j*.01,.15],7);}}
+ for(let i=0;i<48;i++){let x=-45+rng()*90,z=-226+rng()*253;if(Math.abs(x-path(z))<5.3)continue;let r=.25+rng()*.95,y=ht(x,z)+r*.2;scenery.box(x,y,z,r*2,r*.55,r*1.5,[.35,.39,.36]);}
+ for(let i=0;i<16;i++){let z=11-i*14;for(let s of [-1,1]){let x=path(z)+s*4.1;scenery.box(x,ht(x,z)+.6,z,.17,1.2,.17,[.93,.56,.20]);}}
+ anchors=[level.startZ-8,-37,-83,-125,-168,-202].filter(z=>z>level.finishZ+8).map(z=>{let x=path(z)+6;return{x,y:ht(x,z)+1.18,z};});
+ for(let a of anchors){scenery.box(a.x,a.y,a.z,.35,2.36,.35,[.94,.24,.11]);scenery.box(a.x,a.y+1.22,a.z,.68,.18,.68,[.99,.84,.30]);}
+ crashRocks=[];
+ for(let [z,side] of level.rocks){let x=path(z)+side,y=ht(x,z)+.52;crashRocks.push({x,z,r:1.75});scenery.box(x,y,z,1.60,1.12,1.42,[.39,.43,.40]);scenery.box(x-.12,y+.50,z,.93,.27,1.01,[.47,.51,.48]);}
+ servicePoint={x:path((level.startZ+level.finishZ)/2)+6.4,z:(level.startZ+level.finishZ)/2};let serviceY=ht(servicePoint.x,servicePoint.z);
+ scenery.box(servicePoint.x,serviceY+2.0,servicePoint.z,.35,4.0,.35,[.97,.48,.12]);
+ scenery.box(servicePoint.x,serviceY+4.1,servicePoint.z,2.6,.95,.25,[.95,.94,.81]);
+ scenery.box(servicePoint.x,serviceY+.07,servicePoint.z,4.2,.13,5.5,[.69,.47,.18]);
+ for(let [hi,lo] of level.mudZones){let z=(hi+lo)/2;for(let s of [-1,1]){let x=path(z)+s*.91,y=ht(x,z)+.065;scenery.box(x,y,z,1.7,.014,Math.min(7.1,hi-lo-1),[.16,.28,.29]);}}
+ for(let s of [-1,1]){let x=path(level.finishZ)+s*4.2;scenery.box(x,ht(x,level.finishZ)+2.5,level.finishZ,.38,5.0,.4,[.98,.62,.22]);}scenery.box(path(level.finishZ),ht(path(level.finishZ),level.finishZ)+5.0,level.finishZ,8.9,.55,.5,[.98,.62,.22]);
+ ground=land.build();objects=scenery.build();
+}
 const GOLD=[.77,.45,.17],PAINT=[.84,.49,.19],BLACK=[.10,.13,.14],GLASS=[.12,.25,.31],RUBBER=[.07,.075,.075],LIGHT=[.99,.93,.72],RED=[.72,.14,.11];
 truck.box(0,.45,0,1.89,.23,3.7,BLACK);truck.box(0,.73,0,1.85,.52,3.68,PAINT);truck.box(0,1.04,1.03,1.76,.19,1.37,PAINT);truck.box(0,1.24,-.42,1.63,.74,1.96,PAINT);truck.box(0,1.65,-.42,1.69,.14,1.96,BLACK);truck.box(0,1.28,.579,1.5,.53,.042,GLASS);truck.box(0,1.26,-1.411,1.47,.47,.046,GLASS);truck.box(0,.56,1.94,2,.21,.25,BLACK);truck.box(0,.56,-1.94,2,.21,.25,BLACK);truck.box(0,.84,1.92,1.0,.26,.051,BLACK);truck.box(0,.53,2.1,.35,.28,.3,[.43,.46,.39]);for(let s of [-1,1]){truck.box(s*.838,1.29,-.48,.045,.4,1.37,GLASS);truck.box(s*.63,.85,1.89,.36,.20,.065,LIGHT);truck.box(s*.65,.81,-1.91,.34,.22,.061,RED);truck.box(s*1.00,1.25,.43,.30,.17,.19,BLACK);truck.box(s*.98,.43,-.08,.17,.10,1.54,BLACK);for(let z of [1.19,-1.25])truck.wheel(s*.94,.45,z,.47,RUBBER)}
-const ground=land.build(),objects=scenery.build(),vehicle=truck.build();
+const vehicle=truck.build();rebuildWorld();
 const cable={buffer:gl.createBuffer(),count:0};
 function drawCable(pv){if(!winch.active||!winch.anchor)return;const start=[car.x+Math.sin(car.yaw)*2.06,car.y+.58,car.z+Math.cos(car.yaw)*2.06],end=[winch.anchor.x,winch.anchor.y,winch.anchor.z],left=.028;let b=new Builder();const col=[.96,.72,.28],sa=[start[0]-left,start[1],start[2]],sb=[start[0]+left,start[1],start[2]],ea=[end[0]-left,end[1],end[2]],eb=[end[0]+left,end[1],end[2]];b.quad(sa,sb,eb,ea,col);b.quad([start[0],start[1]-left,start[2]],[start[0],start[1]+left,start[2]],[end[0],end[1]+left,end[2]],[end[0],end[1]-left,end[2]],col);gl.bindBuffer(gl.ARRAY_BUFFER,cable.buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(b.data),gl.DYNAMIC_DRAW);cable.count=b.data.length/9;draw(cable,pv,id());}
-let car={x:path(14),z:14,y:ht(path(14),14)+.47,yaw:Math.PI,speed:0,roll:0,pitch:0}, keys={left:false,right:false,gas:false,brake:false,hand:false},farCamera=true,finished=false,shownMsg=false,last=0,awd=true,lowGear=false,winch={active:false,anchor:null,status:'ГОТОВА'};
+let car={x:path(level.startZ),z:level.startZ,y:ht(path(level.startZ),level.startZ)+.47,yaw:Math.PI,speed:0,roll:0,pitch:0}, keys={left:false,right:false,gas:false,brake:false,hand:false},farCamera=true,finished=false,shownMsg=false,last=0,awd=true,lowGear=false,winch={active:false,anchor:null,status:'ГОТОВА'};
 // OFFROAD v0.3 mechanical simulation: chassis, engine, heat, consumable kits and service point.
 let bodyHealth=100, engineHealth=100, engineTemp=73, repairKits=2;
 let impactCooldown=0, alertSeconds=0, conditionMessage='МАШИНА ИСПРАВНА';
@@ -87,7 +131,46 @@ function repair(){if(Math.abs(car.speed)*3.6>3){showAlert('ОСТАНОВИСЬ 
 function powerFactor(){if(engineHealth<=0)return 0;return (.26+.74*engineHealth/100)*(1-Math.max(0,Math.min(.7,(engineTemp-100)/32)));}
 function refreshCondition(){for(let [name,value] of [['body',bodyHealth],['engine',engineHealth]]){btn(name+'Pct').textContent=Math.round(value)+'%';let bar=btn(name+'Bar');bar.style.width=value+'%';bar.style.background=value<35?'#e75b52':value<65?'#e6a44f':'#77d79c';}btn('temp').textContent=Math.round(engineTemp);btn('tempLine').style.color=engineTemp>=107?'#fa7669':engineTemp>=94?'#ffca73':'#dbeae0';btn('kits').textContent=repairKits;btn('conditionNote').textContent=nearService()?'🛠 СТО РЯДОМ — ОСТАНОВИСЬ И НАЖМИ РЕМОНТ':alertSeconds>0?conditionMessage:engineHealth<=0?'ДВИГАТЕЛЬ ЗАГЛОХ — НУЖЕН РЕМОНТ':engineTemp>=107?'ПЕРЕГРЕВ — ТЯГА ПАДАЕТ':bodyHealth<45||engineHealth<45?'ТРЕБУЕТСЯ РЕМОНТ':'Ремонт только стоя · T — ремонт';btn('repair').classList.toggle('active',nearService());}
 const btn=id=>document.getElementById(id);function bind(id,field){let el=btn(id);el.addEventListener('pointerdown',e=>{e.preventDefault();el.setPointerCapture(e.pointerId);keys[field]=true;el.classList.add('down');});for(let evt of ['pointerup','pointercancel','lostpointercapture'])el.addEventListener(evt,e=>{e.preventDefault();keys[field]=false;el.classList.remove('down')});}for(let [id,field] of Object.entries({left:'left',right:'right',gas:'gas',brake:'brake',hand:'hand'}))bind(id,field);
-function reset(){winch.active=false;winch.status='ГОТОВА';refreshTech();car.x=path(Math.max(-198,Math.min(14,car.z+4)));car.z=Math.max(-198,Math.min(14,car.z+4));car.y=ht(car.x,car.z)+.47;car.speed=0;car.yaw=Math.PI;car.roll=0;car.pitch=0;finished=false;shownMsg=false;btn('notify').style.display='none';}
+function reset(){winch.active=false;winch.anchor=null;winch.status='ГОТОВА';refreshTech();car.z=Math.max(level.finishZ+6,Math.min(level.startZ,car.z+4));car.x=path(car.z);car.y=ht(car.x,car.z)+.47;car.speed=0;car.yaw=Math.PI;car.roll=0;car.pitch=0;btn('notify').style.display='none';}
+
+function renderLevelCards(){
+ const cards=btn('levelCards');cards.innerHTML='';
+ LEVELS.forEach((lv,i)=>{
+  const locked=i>=unlocked,card=document.createElement('button');card.type='button';card.className='levelCard'+(i===selectedLevel?' selected':'');card.disabled=locked;
+  const label=locked?'🔒 ЗАКРЫТО':completedLevels.has(i)?'✓ ПРОЙДЕНО':i===levelIndex?'▶ ТЕКУЩИЙ':'● ДОСТУПЕН';
+  card.innerHTML='<span class="levelNum">УРОВЕНЬ '+(i+1)+' · '+lv.tag+'</span><strong>'+lv.name+'</strong><span class="desc">'+lv.desc+'</span><span class="status">'+label+'</span>';
+  card.addEventListener('click',()=>{selectedLevel=i;renderLevelCards();});cards.appendChild(card);
+ });
+ btn('levelProgress').textContent='ПРОЙДЕНО: '+completedLevels.size+' / '+LEVELS.length;
+ btn('continueButton').textContent=selectedLevel===levelIndex&&!finished?'ПРОДОЛЖИТЬ ▶':'НАЧАТЬ УРОВЕНЬ ▶';
+}
+function showLevelMenu(title='ВЫБЕРИ МАРШРУТ'){
+ menuOpen=true;Object.keys(keys).forEach(k=>keys[k]=false);btn('levelTitle').textContent=title;
+ btn('levelMenu').classList.remove('hidden');selectedLevel=Math.min(levelIndex,unlocked-1);renderLevelCards();
+}
+function closeLevelMenu(){menuOpen=false;btn('levelMenu').classList.add('hidden');}
+function startLevel(n){
+ if(n<0||n>=unlocked)return;
+ levelIndex=n;level=LEVELS[n];rebuildWorld();
+ car.x=path(level.startZ);car.z=level.startZ;car.y=ht(car.x,car.z)+.47;car.speed=0;car.yaw=Math.PI;car.roll=0;car.pitch=0;
+ bodyHealth=100;engineHealth=100;engineTemp=73;repairKits=2;impactCooldown=0;alertSeconds=0;
+ awd=true;lowGear=false;finished=false;shownMsg=false;winch={active:false,anchor:null,status:'ГОТОВА'};
+ btn('notify').style.display='none';btn('alert').style.display='none';
+ btn('brand').querySelector('span').textContent='/ '+level.name.toUpperCase()+' · v0.4';
+ btn('mission').textContent='ФИНИШ ЧЕРЕЗ '+Math.ceil(level.startZ-level.finishZ)+' М';
+ cameraxy=[car.x,car.y+5,car.z+9];refreshTech();refreshCondition();closeLevelMenu();
+}
+function winLevel(){
+ if(finished)return;finished=true;car.speed=0;Object.keys(keys).forEach(k=>keys[k]=false);
+ completedLevels.add(levelIndex);unlocked=Math.max(unlocked,Math.min(LEVELS.length,levelIndex+2));saveProgress();
+ btn('notify').style.display='block';btn('notify').textContent='🏁 Уровень '+(levelIndex+1)+' пройден!';
+ if(levelIndex+1<LEVELS.length){selectedLevel=levelIndex+1;showLevelMenu('🏁 УРОВЕНЬ ПРОЙДЕН!');selectedLevel=levelIndex+1;renderLevelCards();}
+ else{showLevelMenu('🏆 ВСЕ УРОВНИ ПРОЙДЕНЫ!');}
+}
+btn('levelsBtn').addEventListener('click',()=>showLevelMenu());
+btn('continueButton').addEventListener('click',()=>{if(selectedLevel===levelIndex&&!finished)closeLevelMenu();else startLevel(selectedLevel);});
+renderLevelCards();
+
 function refreshTech(){btn('awd').textContent=awd?'4×4 ВКЛ':'4×2 ВКЛ';btn('low').textContent=lowGear?'LOW ВКЛ':'LOW ВЫКЛ';btn('awd').classList.toggle('active',awd);btn('low').classList.toggle('active',lowGear);btn('winch').classList.toggle('active',winch.active);}
 function toggleAWD(){awd=!awd;refreshTech();}
 function toggleLow(){lowGear=!lowGear;refreshTech();}
@@ -96,11 +179,12 @@ btn('awd').addEventListener('click',toggleAWD);btn('low').addEventListener('clic
 btn('reset').addEventListener('click',reset);btn('camera').addEventListener('click',()=>{farCamera=!farCamera});
 const keymap={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'gas',KeyW:'gas',ArrowDown:'brake',KeyS:'brake',Space:'hand'};addEventListener('keydown',e=>{if(e.code in keymap){keys[keymap[e.code]]=true;e.preventDefault();}if(e.code==='KeyR'&&!e.repeat)reset();if(e.code==='KeyF'&&!e.repeat)toggleAWD();if(e.code==='KeyQ'&&!e.repeat)toggleLow();if(e.code==='KeyE'&&!e.repeat)toggleWinch();if(e.code==='KeyT'&&!e.repeat)repair();if(e.code==='KeyC'&&!e.repeat)farCamera=!farCamera;});addEventListener('keyup',e=>{if(e.code in keymap){keys[keymap[e.code]]=false;e.preventDefault();}});addEventListener('blur',()=>Object.keys(keys).forEach(k=>keys[k]=false));
 function update(dt){
+ if(menuOpen||finished){car.speed=0;return;}
  dt=Math.min(dt,.045);
  impactCooldown=Math.max(0,impactCooldown-dt);alertSeconds=Math.max(0,alertSeconds-dt);
  if(alertSeconds<=0)btn('alert').style.display='none';
  const isMud=mud(car.x,car.z),steer=(keys.left?1:0)-(keys.right?1:0);
- const traction=isMud?(awd?.45:.24):(awd?1:.85);
+ const traction=isMud?(awd?(levelIndex===2?.36:.45):.24):(awd?1:.85);
  // Engine temperature and persistent wear accelerate in mud, especially without LOW.
  if(keys.gas&&engineHealth>0){let load=isMud?2.0:.8;if(lowGear&&isMud)load*=.6;if(isMud&&!awd)load*=1.42;engineTemp=Math.min(125,engineTemp+load*dt);let wear=.016+(isMud?.15:0);if(isMud&&lowGear)wear*=.62;engineHealth=Math.max(0,engineHealth-wear*dt);}
  else engineTemp=Math.max(70,engineTemp-1.8*dt);
@@ -112,7 +196,7 @@ function update(dt){
  else if(keys.gas){accel=isMud?(lowGear?(awd?8.5:3.5):(awd?3.6:1.7)):(lowGear?10.2:7.0);}
  if(!keys.gas&&!keys.brake)car.speed*=Math.exp(-dt*(isMud?1.30:.57));
  car.speed+=accel*powerFactor()*dt;
- const maxForward=lowGear?(isMud?7.2:8.0):(isMud?(awd?11:6):19.2);
+ const maxForward=(lowGear?(isMud?7.2:8.0):(isMud?(awd?11:6):19.2))*(levelIndex===3?.91:1);
  car.speed=Math.max(lowGear?-4.0:-7,Math.min(maxForward,car.speed));
  if(keys.hand&&Math.abs(car.speed)<.15)car.speed=0;
  let steerpower=Math.min(1,Math.abs(car.speed)/3.5);
@@ -132,14 +216,14 @@ function update(dt){
  btn('number').textContent=Math.round(Math.abs(car.speed)*3.6);
  btn('surface').textContent=isMud?'ПОКРЫТИЕ: ГЛУБОКАЯ ГРЯЗЬ':'ПОКРЫТИЕ: ГРУНТ / ТРАВА';btn('surface').style.color=isMud?'#ffb76f':'white';
  btn('driveMode').textContent=(awd?'4×4':'4×2')+' · LOW: '+(lowGear?'ВКЛ':'ВЫКЛ')+' · ЛЕБЁДКА: '+winch.status;refreshCondition();
- btn('mission').textContent=finished?'ФИНИШ! ТРАССА ПРОЙДЕНА 🏁':'ФИНИШ ЧЕРЕЗ '+Math.max(0,Math.ceil(car.z+203))+' М';
- if(!finished&&car.z<-197&&off<8){finished=true;btn('notify').style.display='block';btn('notify').textContent='🏁 Финиш! Маршрут пройден';}
+ btn('mission').textContent='УРОВЕНЬ '+(levelIndex+1)+'/4 · ДО ФИНИША '+Math.max(0,Math.ceil(car.z-level.finishZ))+' М';
+ if(car.z<=level.finishZ+5&&off<8)winLevel();
 }
 if(new URLSearchParams(location.search).has('test')){window.__offroadTest={
- state:()=>({x:car.x,z:car.z,speed:car.speed,bodyHealth,engineHealth,engineTemp,repairKits,nearService:nearService(),alert:conditionMessage}),
+ state:()=>({x:car.x,z:car.z,speed:car.speed,bodyHealth,engineHealth,engineTemp,repairKits,nearService:nearService(),alert:conditionMessage,levelIndex,unlocked,completed:[...completedLevels],menuOpen,finishZ:level.finishZ,terrainName:level.name,mud:mud(car.x,car.z),rocks:crashRocks.length,anchors:anchors.length}),
  setCar:(x,z,speed=0)=>{car.x=x;car.z=z;car.y=ht(x,z)+.47;car.speed=speed;},
  impact:(speed)=>{damageFromImpact(speed);refreshCondition();},repair:()=>repair(),
- setDamage:(b,e,temp=engineTemp,kits=repairKits)=>{bodyHealth=b;engineHealth=e;engineTemp=temp;repairKits=kits;refreshCondition();}
+ setDamage:(b,e,temp=engineTemp,kits=repairKits)=>{bodyHealth=b;engineHealth=e;engineTemp=temp;repairKits=kits;refreshCondition()},levels:()=>LEVELS.map(l=>({name:l.name,startZ:l.startZ,finishZ:l.finishZ,mudZones:l.mudZones,rocks:l.rocks.length})),startLevel:(n)=>startLevel(n),finish:()=>{car.z=level.finishZ+4;car.x=path(car.z);winLevel()},showMenu:()=>showLevelMenu(),select:(n)=>{selectedLevel=n;renderLevelCards();},continue:()=>{if(selectedLevel===levelIndex&&!finished)closeLevelMenu();else startLevel(selectedLevel)}
  };}
 let cameraxy=[car.x,car.y+5,car.z+9];function render(t){let dt=last?(t-last)/1000:0;last=t;update(dt);let w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(window.devicePixelRatio||1,1.8),W=Math.min(2300,Math.round(w*dpr)),H=Math.min(1600,Math.round(h*dpr));if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;gl.viewport(0,0,W,H)}const f=farCamera?10.1:6.0,up=farCamera?4.3:2.6,desired=[car.x-Math.sin(car.yaw)*f,car.y+up,car.z-Math.cos(car.yaw)*f];let rate=Math.min(1,dt*5);for(let i=0;i<3;i++)cameraxy[i]+=(desired[i]-cameraxy[i])*rate;let hcam=ht(cameraxy[0],cameraxy[2]);cameraxy[1]=Math.max(cameraxy[1],hcam+1.7);gl.clearColor(.43,.62,.75,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);let pr=persp(Math.PI/3.25,W/H,.15,340),vw=look(cameraxy,[car.x,car.y+1.15,car.z]),pv=mult(pr,vw);gl.uniform3fv(uEye,new Float32Array(cameraxy));draw(ground,pv,id());draw(objects,pv,id());draw(vehicle,pv,model([car.x,car.y,car.z],car.yaw,car.roll,car.pitch));drawCable(pv);
   if(!window.__offroadFirstFrame){window.__offroadFirstFrame=true;document.getElementById('bootIndicator').style.display='none';}
